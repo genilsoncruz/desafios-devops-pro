@@ -1,0 +1,34 @@
+version: '3'
+
+networks:
+  mysql-network:
+    driver: bridge
+
+volumes:
+  mysql-volume:
+
+services:
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    networks:
+      - "mysql-network"
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "8081:80"
+    restart: always
+    depends_on:
+      - "mysql"
+      
+  mysql:
+    image: mysql:8.0.30
+    volumes: 
+      - "mysql-volume:/data/db"
+    networks:
+      - "mysql-network"
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    ports:
+      - "8080:8080"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always

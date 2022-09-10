@@ -1,0 +1,47 @@
+version: '3'
+
+networks:
+  kubenews-network:
+    driver: bridge
+
+services:
+  kubenews:
+    image: kubenews:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_DATABASE: kubedevnews
+      DB_USERNAME: kubedevnews
+      DB_PASSWORD: Pg#123
+      DB_HOST: postgres
+    networks:
+      - "kubenews-network"
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - "postgres"
+
+  pgadmin4:
+    image: dpage/pgadmin4:6.13
+    environment:
+      PGADMIN_DEFAULT_EMAIL: kubedevnews@kubedevnews.com
+      PGADMIN_DEFAULT_PASSWORD: Pg#123
+    networks:
+      - "kubenews-network"
+    ports:
+      - "8080:80"
+      - "8443:443"
+    depends_on:
+      - "postgres"
+
+  postgres:
+    image: postgres:14.5
+    networks:
+      - "kubenews-network"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: kubedevnews
+      POSTGRES_PASSWORD: Pg#123

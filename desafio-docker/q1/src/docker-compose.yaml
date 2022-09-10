@@ -1,0 +1,38 @@
+version: '3'
+
+networks:
+  mongo-network:
+    driver: bridge
+
+volumes:
+  mongo-volume:
+
+services:
+  mongo-express:
+    image: mongo-express:0.54.0
+    networks:
+    - "mongo-network"
+    environment:    
+      ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_AUTH_USERNAME: admin
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: pass 
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: pass
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - "mongodb"
+      
+  mongodb:
+    image: mongo:latest
+    volumes: 
+      - "mongo-volume:/data/db"
+    networks:
+      - "mongo-network"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    ports:
+      - "27017:27017"

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  app:
+    image: genilsoncruz/conversao-distancia:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
