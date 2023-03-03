@@ -6,10 +6,6 @@ docker tag genilsoncruz/conversao-distancia:v1 genilsoncruz/conversao-distancia:
 
 docker push genilsoncruz/conversao-distancia:latest
 
-docker image ls
-
-kubectl apply -f q3-deployment.yaml
-
-kubectl apply -f q3-service.yaml
+kubectl apply -f q3-deployment.yaml -f q3-service.yaml
 
 kubectl port-forward pod/conversao-distancia-647dbd6d6b-vd9tw 8080:80
