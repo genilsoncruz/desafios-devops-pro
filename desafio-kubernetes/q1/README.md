@@ -1,10 +1,4 @@
-Container Resistry hub.docker.com
-
 docker build -t genilsoncruz/conversao-temperatura:v1 .
-
-docker logout
-
-docker login
 
 docker push genilsoncruz/conversao-temperatura:v1
 
