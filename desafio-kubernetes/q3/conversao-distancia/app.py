@@ -24,7 +24,7 @@ def index():
         return render_template('index.html', conteudo={'unidade': unidade, 'valor': resultado})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=80)
 else:
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
