@@ -12,5 +12,6 @@ spec:
   - port: 443
     targetPort: 443
     name: https
-  type: NodePort
+  type: ClusterIP
+  #type: NodePort
   #type: LoadBalancer
