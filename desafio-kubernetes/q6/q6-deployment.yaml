@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-news-deployment
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: kube-news
+  template:
+    metadata:
+      labels:
+        app: kube-news
+    spec:
+      containers:
+      - name: kube-news
+        image: genilsoncruz/kube-news:v1
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: DB_DATABASE
+          value: kubedevnews
+        - name: DB_USERNAME
+          value: kubedevnews
+        - name: DB_PASSWORD
+          value: Pg#123
+        - name: DB_HOST
+          value: postgres-service

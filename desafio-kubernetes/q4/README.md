@@ -1,4 +1,4 @@
-docker build -t genilsoncruz/pedelogo-catalogo:v1 -f ./pedelogo-catalogo/src/PedeLogo.Catalogo.Api/Dockerfile ./pedelogo-catalogo/
+docker build -t genilsoncruz/pedelogo-catalogo:v1 -f ./Dockerfile ./pedelogo-catalogo/
 
 docker push genilsoncruz/pedelogo-catalogo:v1
 
@@ -10,3 +10,5 @@ kubectl apply -f q4-deployment.yaml -f q4-deployment-service.yaml -f q4-mongodb.
 
 kubectl port-forward pod/pedelogo-catalogo-deployment-78d75c648b-xhpjj 8080:80
 kubectl port-forward pod/pedelogo-catalogo-deployment-78d75c648b-xhpjj 8443:443
+
+kubectl delete -f q4-deployment.yaml -f q4-deployment-service.yaml -f q4-mongodb.yaml -f q4-mongodb-service.yaml
