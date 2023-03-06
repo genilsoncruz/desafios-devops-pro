@@ -8,6 +8,6 @@ docker push genilsoncruz/rotten-potatoes:latest
 
 kubectl apply -f q5-deployment.yaml -f q5-deployment-service.yaml -f q5-mongodb.yaml -f q5-mongodb-service.yaml
 
-kubectl port-forward pod/rotten-potatoes-deployment-b6859d59b-wbgw7 5000:5000
+kubectl port-forward $(kubectl get --no-headers=true pods -o name --selector=app=rotten-potatoes) 5000:5000
 
 kubectl delete -f q5-deployment.yaml -f q5-deployment-service.yaml -f q5-mongodb.yaml -f q5-mongodb-service.yaml

@@ -1,7 +1,7 @@
-FROM node:16.17
+FROM python:3.8.12-slim-buster
+EXPOSE 5000
+COPY requirements.txt .
+RUN python -m pip install -r requirements.txt
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . ./
-EXPOSE 8080
-CMD ["node", "server.js"]
+COPY . /app
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "-c", "config.py", "app:app"]

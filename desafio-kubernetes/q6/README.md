@@ -8,6 +8,6 @@ docker push genilsoncruz/kube-news:latest
 
 kubectl apply -f q6-deployment.yaml -f q6-deployment-service.yaml -f q6-postgres.yaml -f q6-postgres-service.yaml
 
-kubectl port-forward pod/kube-news-deployment-559d4794-jqcd9 8080:8080
+kubectl port-forward $(kubectl get --no-headers=true pods -o name --selector=app=kube-news) 8080:8080
 
 kubectl delete -f q6-deployment.yaml -f q6-deployment-service.yaml -f q6-postgres.yaml -f q6-postgres-service.yaml
